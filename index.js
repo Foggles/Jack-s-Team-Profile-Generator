@@ -6,6 +6,8 @@ const Manager = require('./lib/Manager');
 const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
 
+const employees = [];
+
 
 function createEngineer() {
     inquirer
@@ -40,25 +42,28 @@ function createEngineer() {
                     'Finish'
                 ],
             },
-        ]).then((response)=> {
-            if(response.menu === 'Engineer') {
-                createEngineer();
-                
+        ]).then((response) => {
+            if (response.menu === 'Engineer') {
                 const newEngineer = new Engineer(response.engineerName, response.engineerId, response.engineerEmailAddress, response.engineerGitHub);
                 console.log(newEngineer);
 
+                createEngineer();
+
+                employees.push(newEngineer);
                 return newEngineer;
             } else if (response.menu === 'Intern') {
-                createIntern();
-                
                 const newEngineer = new Engineer(response.engineerName, response.engineerId, response.engineerEmailAddress, response.engineerGitHub);
                 console.log(newEngineer);
 
+                createIntern();
+
+                employees.push(newEngineer);
                 return newEngineer;
             } else {
                 const newEngineer = new Engineer(response.engineerName, response.engineerId, response.engineerEmailAddress, response.engineerGitHub);
                 console.log(newEngineer);
 
+                employees.push(newEngineer);                
                 return newEngineer;
             };
         });
@@ -69,7 +74,7 @@ function createIntern() {
         .prompt([
             {
                 type: 'input',
-                message: 'What is the name of the Intenr?',
+                message: 'What is the name of the Intern?',
                 name: 'internName',
             },
             {
@@ -80,7 +85,7 @@ function createIntern() {
             {
                 type: 'input',
                 message: 'What is their email address?',
-                name: 'engineerEmailAddress',
+                name: 'internEmailAddress',
             },
             {
                 type: 'input',
@@ -97,13 +102,29 @@ function createIntern() {
                     'Finish'
                 ],
             },
-        ]).then((response)=> {
-            if(response.menu === 'Engineer') {
+        ]).then((response) => {
+            if (response.menu === 'Engineer') {
+                const newIntern = new Intern(response.internName, response.internId, response.internEmailAddress, response.internSchool);
+                console.log(newIntern);
+
                 createEngineer();
+
+                employees.push(newIntern);
+                return newIntern;
             } else if (response.menu === 'Intern') {
-                createIntern;
+                const newIntern = new Intern(response.internName, response.internId, response.internEmailAddress, response.internSchool);
+                console.log(newIntern);
+
+                createIntern();
+
+                employees.push(newIntern);
+                return newIntern;
             } else {
-                return;
+                const newIntern = new Intern(response.internName, response.internId, response.internEmailAddress, response.internSchool);
+                console.log(newIntern);
+
+                employees.push(newIntern);
+                return newIntern;
             };
         });
 };
@@ -118,7 +139,7 @@ inquirer
         {
             type: 'input',
             message: 'What is their Employee ID?',
-            name: 'managerID',
+            name: 'managerId',
         },
         {
             type: 'input',
@@ -143,10 +164,31 @@ inquirer
     ]).then((response) => {
 
         if (response.menu === 'Engineer') {
+            const newManager = new Manager(response.managerName, response.managerId, response.managerEmailAddress, response.managerOfficeNumber);
+            console.log(newManager);
+
             createEngineer();
-        };
+
+            employees.push(newManager);
+            return newManager;
+        } else if (response.menu === 'Intern') {
+            const newManager = new Manager(response.managerName, response.managerId, response.managerEmailAddress, response.managerOfficeNumber);
+            console.log(newManager);
+
+            createIntern();
+
+            employees.push(newManager);
+            return newManager;
+        } else {
+            const newManager = new Manager(response.managerName, response.managerId, response.managerEmailAddress, response.managerOfficeNumber);
+            console.log(newManager);
+
+            employees.push(newManager);
+            return newManager;
+        }
 
     });
+
 
 function createEmployeeCard(employee) {
 
