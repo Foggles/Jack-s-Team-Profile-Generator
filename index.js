@@ -1,13 +1,43 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
 
-const Employee = require('./lib/Employee');
+// const Employee = require('./lib/Employee');
 const Manager = require('./lib/Manager');
 const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
 
 const employees = [];
 
+// function createEmployeeHTML() {
+//     console.log(employees);
+
+//     for (let index = 0; index < employees.length; index++) {
+//         const newCard = document.createElement('div');
+
+//         const newCardName = document.createElement('div');
+//         const newCardId = document.createElement('div');
+//         const newCardRole = document.createElement('div');
+//         const newCardOther = document.createElement('div');
+
+//         newCard.classList.add('card');
+//         newCardName.classList.add('card-title');
+//         newCardId.classList.add('card-title');
+//         newCardRole.classList.add('card-title');
+//         newCardOther.classList.add('card-title');
+        
+//         newCardName.textContent = index.name;
+//         newCardId.textContent = index.id;
+//         newCard.textContent = index.email;
+//         // newCardName.textContent = index.name;
+
+//         newCard.appendChild(newCardName);
+//         newCard.appendChild(newCardId);
+//         newCard.appendChild(newCardRole);
+//         // newCard.appendChild(newCardName);
+
+//         cardContainer.appendChild(newCard);
+//     }
+// };
 
 function createEngineer() {
     inquirer
@@ -188,12 +218,3 @@ inquirer
         }
 
     });
-
-
-function createEmployeeCard(employee) {
-
-
-
-};
-
-createEmployeeCard()
