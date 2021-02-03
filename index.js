@@ -19,16 +19,9 @@ function createEmployeeHTML() {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Employees</title>
-
-    <style>
-        .card{
-            box-shadow: 5px 5px 5px gray;
-            border: 1px solid gray;
-            width: 18rem;
-        }
-    </style>
     
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <link rel="stylesheet" href="./style.css">
 
     </head>
 
@@ -37,9 +30,10 @@ function createEmployeeHTML() {
     <section>
         <h1>My Employees</h1>
     </section>
+
 `;
 
-    fs.writeFile('index.html', fsOutput, (err) => {
+    fs.writeFile('./dist/index.html', fsOutput, (err) => {
         if (err) throw err;
         console.log("File created successfully");
     });
@@ -52,38 +46,42 @@ function createEmployeeHTML() {
         if (employee instanceof Engineer) {
             employeeFsOutput = `
             <div class="card">
-                <div class="card-title"> ${employee.getName()} </div>
-                <div class="card-title"> ${employee.getId()} </div>
-                <div class="card-title"> ${employee.getRole()} </div>
-                <div class="card-title"> ${employee.getEmail()} </div>
-                <div class="card-title"><a href='${employee.gitHub()}'>${employee.gitHub()}</a></div>
+                <div id="cardTitle" class="card-title"> <h2> ${employee.getName()} </h2> </div>
+                <div id="cardTitle" class="card-title"> <h3> ${employee.getRole()} </h3> </div>
+                <div class="card-body"> ${employee.getId()} </div>
+                <div class="card-body"> ${employee.getEmail()} </div>
+                <div class="card-body"><a href='${employee.gitHub()}'>${employee.gitHub()}</a></div>
             </div>
             `
         } else if (employee instanceof Manager) {
             employeeFsOutput = `
             <div class="card">
-                <div class="card-title"> ${employee.getName()} </div>
-                <div class="card-title"> ${employee.getId()} </div>
-                <div class="card-title"> ${employee.getRole()} </div>
-                <div class="card-title"> ${employee.getEmail()} </div>
-                <div class="card-title"> ${employee.officeNumber} </div>
+                <div id="cardTitle" class="card-title"> <h2> ${employee.getName()} </h2> </div>
+                <div id="cardTitle" class="card-title"> <h3> ${employee.getRole()} </h3> </div>
+                <div class="card-body"> ${employee.getId()} </div>
+                <div class="card-body"> ${employee.getEmail()} </div>
+                <div class="card-body"> ${employee.officeNumber} </div>
             </div>
             `
         } else {
             employeeFsOutput = `
             <div class="card">
-                <div class="card-title"> ${employee.getName()} </div>
-                <div class="card-title"> ${employee.getId()} </div>
-                <div class="card-title"> ${employee.getRole()} </div>
-                <div class="card-title"><a href='mailto: ${employee.getEmail()}'>Send Email</a></div>
-                <div class="card-title"> ${employee.getSchool()} </div>
+                <div id="cardTitle" class="card-title"> <h2> ${employee.getName()} </h2> </div>
+                <div id="cardTitle" class="card-title"> <h3> ${employee.getRole()} </h3> </div>
+                <div class="card-body"> ${employee.getId()} </div>
+                <div class="card-body"><a href='mailto: ${employee.getEmail()}'>Send Email</a></div>
+                <div class="card-body"> ${employee.getSchool()} </div>
             </div>
             `
         }
 
-        const finalFsOutput = employeeFsOutput + '<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script> </body> </html>';
+        const finalFsOutput = employeeFsOutput + `
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous">
+        </script> 
+        </body> 
+        </html>`;
 
-        fs.appendFile('index.html', finalFsOutput, (err) => {
+        fs.appendFile('./dist/index.html', finalFsOutput, (err) => {
             if (err) throw err;
             console.log("Data appended successfully.");
         });

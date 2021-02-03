@@ -1,0 +1,17 @@
+.card{
+    box-shadow: 5px 5px 5px gray;
+    border: 1px solid gray;
+    width: 18rem;
+    padding: 8px;
+    margin: 10px;
+}
+
+h1 {
+    margin: 5px;
+    margin-left: 15px;
+    text-decoration: underline;
+}
+
+#cardTitle {
+    background-color: chartreuse;
+}
