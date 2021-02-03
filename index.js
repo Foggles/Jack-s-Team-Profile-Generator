@@ -5,39 +5,62 @@ const fs = require('fs');
 const Manager = require('./lib/Manager');
 const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
+const { create } = require('istanbul-reports');
 
 const employees = [];
 
-// function createEmployeeHTML() {
-//     console.log(employees);
+function createEmployeeHTML() {
+    console.log(employees);
 
-//     for (let index = 0; index < employees.length; index++) {
-//         const newCard = document.createElement('div');
+    const fsOutput = `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employees</title>
 
-//         const newCardName = document.createElement('div');
-//         const newCardId = document.createElement('div');
-//         const newCardRole = document.createElement('div');
-//         const newCardOther = document.createElement('div');
+    <style>
+        .card{
+            box-shadow: 5px 5px 5px gray;
+            border: 1px solid gray;
+        }
+    </style>
+</head>
 
-//         newCard.classList.add('card');
-//         newCardName.classList.add('card-title');
-//         newCardId.classList.add('card-title');
-//         newCardRole.classList.add('card-title');
-//         newCardOther.classList.add('card-title');
-        
-//         newCardName.textContent = index.name;
-//         newCardId.textContent = index.id;
-//         newCard.textContent = index.email;
-//         // newCardName.textContent = index.name;
+<body>
 
-//         newCard.appendChild(newCardName);
-//         newCard.appendChild(newCardId);
-//         newCard.appendChild(newCardRole);
-//         // newCard.appendChild(newCardName);
+    <section>
+        <h1>My Employees</h1>
+    </section>
 
-//         cardContainer.appendChild(newCard);
-//     }
-// };
+    
+</body>
+
+</html>`;
+
+        fs.writeFile('index.html', fsOutput, (err) => {
+            if (err) throw err;
+            console.log("File created successfully");
+        });
+
+    for (let index = 0; index < employees.length; index++) {
+        const employee = employees[index];
+
+        const employeeFsOutput = `
+        <div class="card">
+            <div class="card-title"> ${employee[index].name} </div>
+            <div class="card-title"> ${employee[index].id} </div>
+            <div class="card-title"> ${employee[index].role} </div>
+        </div>
+        `
+
+        fs.appendFile('index.html', employeeFsOutput, (err) => {
+            if (err) throw err;
+            console.log("Data appended successfully.");
+        }); 
+    };
+};
 
 function createEngineer() {
     inquirer
@@ -154,6 +177,7 @@ function createIntern() {
                 console.log(newIntern);
 
                 employees.push(newIntern);
+                createEmployeeHTML();
                 return newIntern;
             };
         });
