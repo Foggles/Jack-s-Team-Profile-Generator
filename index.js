@@ -33,30 +33,53 @@ function createEmployeeHTML() {
     <section>
         <h1>My Employees</h1>
     </section>
-
-    
-</body>
-
-</html>`;
+`;
 
         fs.writeFile('index.html', fsOutput, (err) => {
             if (err) throw err;
             console.log("File created successfully");
         });
 
-    for (let index = 0; index < employees.length; index++) {
-        const employee = employees[index];
+    for (const employee of employees) {
+        console.log(employee.name);
+        
+        let employeeFsOutput;
 
-        const employeeFsOutput = `
-        <div class="card">
-            <div class="card-title"> ${employee[index].name.name} </div>
-            <div class="card-title"> ${employee[index].name.id} </div>
-            <div class="card-title"> ${employee[index].name.role} </div>
-            <div class="card-title"> ${employee[index].name.email} </div>
-        </div>
-        `
+        if (employee instanceof Engineer) {
+            employeeFsOutput = `
+            <div class="card">
+                <div class="card-title"> ${employee.getName()} </div>
+                <div class="card-title"> ${employee.getId()} </div>
+                <div class="card-title"> ${employee.getRole()} </div>
+                <div class="card-title"> ${employee.getEmail()} </div>
+                <div class="card-title"> ${employee.gitHub()} </div>
+            </div>
+            `
+        } else if (employee instanceof Manager) {
+            employeeFsOutput = `
+            <div class="card">
+                <div class="card-title"> ${employee.getName()} </div>
+                <div class="card-title"> ${employee.getId()} </div>
+                <div class="card-title"> ${employee.getRole()} </div>
+                <div class="card-title"> ${employee.getEmail()} </div>
+                <div class="card-title"> ${employee.officeNumber} </div>
+            </div>
+            `
+        } else {
+            employeeFsOutput = `
+            <div class="card">
+                <div class="card-title"> ${employee.getName()} </div>
+                <div class="card-title"> ${employee.getId()} </div>
+                <div class="card-title"> ${employee.getRole()} </div>
+                <div class="card-title"> ${employee.getEmail()} </div>
+                <div class="card-title"> ${employee.getSchool()} </div>
+            </div>
+            `
+        }
 
-        fs.appendFile('index.html', employeeFsOutput, (err) => {
+        const asd = employeeFsOutput + '</body> </html>';
+
+        fs.appendFile('index.html', asd, (err) => {
             if (err) throw err;
             console.log("Data appended successfully.");
         }); 
