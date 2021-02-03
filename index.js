@@ -52,31 +52,31 @@ function createEmployeeHTML() {
         if (employee instanceof Engineer) {
             employeeFsOutput = `
             <div class="card">
-                <div id="cardTitle" class="card-title"> <h2> ${employee.getName()} </h2> </div>
-                <div id="cardTitle" class="card-title"> <h3> ${employee.getRole()} </h3> </div>
-                <div class="card-body"> ${employee.getId()} </div>
-                <div class="card-body"> ${employee.getEmail()} </div>
+                <div id="cardTitle" class="card-title"> <h2> Name: ${employee.getName()} </h2> </div>
+                <div id="cardTitle" class="card-title"> <h3> Role: ${employee.getRole()} </h3> </div>
+                <div class="card-body"> Employee ID: ${employee.getId()} </div>
+                <div class="card-body"><a href='mailto: ${employee.getEmail()}'>Send Email</a></div>
                 <div class="card-body"><a href='${employee.gitHub()}'>${employee.gitHub()}</a></div>
             </div>
             `
         } else if (employee instanceof Manager) {
             employeeFsOutput = `
             <div class="card">
-                <div id="cardTitle" class="card-title"> <h2> ${employee.getName()} </h2> </div>
-                <div id="cardTitle" class="card-title"> <h3> ${employee.getRole()} </h3> </div>
-                <div class="card-body"> ${employee.getId()} </div>
-                <div class="card-body"> ${employee.getEmail()} </div>
-                <div class="card-body"> ${employee.officeNumber} </div>
+                <div id="cardTitle" class="card-title"> <h2> Name: ${employee.getName()} </h2> </div>
+                <div id="cardTitle" class="card-title"> <h3> Role: ${employee.getRole()} </h3> </div>
+                <div class="card-body"> Employee ID: ${employee.getId()} </div>
+                <div class="card-body"><a href='mailto: ${employee.getEmail()}'>Send Email</a></div>
+                <div class="card-body"> Office Number: ${employee.officeNumber} </div>
             </div>
             `
         } else {
             employeeFsOutput = `
             <div class="card">
-                <div id="cardTitle" class="card-title"> <h2> ${employee.getName()} </h2> </div>
-                <div id="cardTitle" class="card-title"> <h3> ${employee.getRole()} </h3> </div>
-                <div class="card-body"> ${employee.getId()} </div>
+                <div id="cardTitle" class="card-title"> <h2> Name: ${employee.getName()} </h2> </div>
+                <div id="cardTitle" class="card-title"> <h3> Role: ${employee.getRole()} </h3> </div>
+                <div class="card-body"> Employee ID: ${employee.getId()} </div>
                 <div class="card-body"><a href='mailto: ${employee.getEmail()}'>Send Email</a></div>
-                <div class="card-body"> ${employee.getSchool()} </div>
+                <div class="card-body"> School: ${employee.getSchool()} </div>
             </div>
             `
         }
