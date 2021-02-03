@@ -9,11 +9,18 @@ beforeEach(() => {
 
 describe('../lib/Employee', () => {
 
-it('You can check if the Engineer called the class constructor at Employee', () => {
+it('You can check if the Manager called the class constructor at Employee', () => {
     const manager = new Manager();
 
     expect(Employee).toHaveBeenCalledTimes(1);
-    console.log("Intern called Employee Constructor Once");
+    console.log("Manager called Employee Constructor Once");
+});
+
+it('You can check if the Manager called the class constructor at Manager', () => {
+    const manager = new Manager();
+
+    expect(Manager).toHaveBeenCalledTimes(1);
+    console.log("Manager called Manager Constructor Once");
 });
 
 });

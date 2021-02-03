@@ -16,4 +16,11 @@ it('You can check if the Engineer called the class constructor at Employee', () 
     console.log("Engineer called Employee Constructor Once");
 });
 
+it('You can check if the Engineer called the class constructor at Engineer', () => {
+    const engineer = new Engineer();
+
+    expect(Engineer).toHaveBeenCalledTimes(1);
+    console.log("Engineer called Engineer Constructor Once");
+});
+
 });
