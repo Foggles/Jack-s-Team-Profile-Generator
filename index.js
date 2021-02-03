@@ -49,9 +49,10 @@ function createEmployeeHTML() {
 
         const employeeFsOutput = `
         <div class="card">
-            <div class="card-title"> ${employee[index].name} </div>
-            <div class="card-title"> ${employee[index].id} </div>
-            <div class="card-title"> ${employee[index].role} </div>
+            <div class="card-title"> ${employee[index].name.name} </div>
+            <div class="card-title"> ${employee[index].name.id} </div>
+            <div class="card-title"> ${employee[index].name.role} </div>
+            <div class="card-title"> ${employee[index].name.email} </div>
         </div>
         `
 
