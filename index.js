@@ -1,17 +1,21 @@
+// Requiring npm packages
 const inquirer = require('inquirer');
 const fs = require('fs');
 
-// const Employee = require('./lib/Employee');
+// Storing multiple classes in const variables.
 const Manager = require('./lib/Manager');
 const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
-// const { create } = require('istanbul-reports');
 
+// Creating empty employees array for later use
 const employees = [];
 
+// Function used to create and/or append index.html with data from user
 function createEmployeeHTML() {
+    // Console logging the employees array
     console.log(employees);
 
+    // Defining the html for index.html
     const fsOutput = `
 <!DOCTYPE html>
 <html lang="en">
@@ -33,11 +37,13 @@ function createEmployeeHTML() {
 
 `;
 
+    // Writing index.html with fsOutput
     fs.writeFile('./dist/index.html', fsOutput, (err) => {
         if (err) throw err;
         console.log("File created successfully");
     });
 
+    // Creating html cards for each employee inside employees array, depending on whether or not the employee is an instanceof a certain class
     for (const employee of employees) {
         console.log(employee.name);
 
@@ -75,12 +81,14 @@ function createEmployeeHTML() {
             `
         }
 
+        // Adding html end tags to the finalFsOutput
         const finalFsOutput = employeeFsOutput + `
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous">
         </script> 
         </body> 
         </html>`;
 
+        // Appending index.html with the finalFsOutput
         fs.appendFile('./dist/index.html', finalFsOutput, (err) => {
             if (err) throw err;
             console.log("Data appended successfully.");
@@ -88,6 +96,8 @@ function createEmployeeHTML() {
     };
 };
 
+// Function that creates new instances of the Engineer class.
+// Once the user has answered the four input prompts for the Engineer, they can select whether to create another Engineer, Intern or to finish and build the HTML
 function createEngineer() {
     inquirer
         .prompt([
@@ -149,6 +159,8 @@ function createEngineer() {
         });
 };
 
+// Function that creates new instances of the Intern class.
+// Once the user has answered the four input prompts for the Intern, they can select whether to create another Intern, Engineer or to finish and build the HTML
 function createIntern() {
     inquirer
         .prompt([
@@ -210,6 +222,8 @@ function createIntern() {
         });
 };
 
+// Initial prompt to the user, creates a new instance of the Manager class.
+// Once the user has answered the four input prompts for the Manager, they can select whether to create an Engineer, Intern or to finish and build the HTML
 inquirer
     .prompt([
         {
