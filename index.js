@@ -5,7 +5,7 @@ const fs = require('fs');
 const Manager = require('./lib/Manager');
 const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
-const { create } = require('istanbul-reports');
+// const { create } = require('istanbul-reports');
 
 const employees = [];
 
@@ -24,9 +24,13 @@ function createEmployeeHTML() {
         .card{
             box-shadow: 5px 5px 5px gray;
             border: 1px solid gray;
+            width: 18rem;
         }
     </style>
-</head>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+
+    </head>
 
 <body>
 
@@ -35,14 +39,14 @@ function createEmployeeHTML() {
     </section>
 `;
 
-        fs.writeFile('index.html', fsOutput, (err) => {
-            if (err) throw err;
-            console.log("File created successfully");
-        });
+    fs.writeFile('index.html', fsOutput, (err) => {
+        if (err) throw err;
+        console.log("File created successfully");
+    });
 
     for (const employee of employees) {
         console.log(employee.name);
-        
+
         let employeeFsOutput;
 
         if (employee instanceof Engineer) {
@@ -52,7 +56,7 @@ function createEmployeeHTML() {
                 <div class="card-title"> ${employee.getId()} </div>
                 <div class="card-title"> ${employee.getRole()} </div>
                 <div class="card-title"> ${employee.getEmail()} </div>
-                <div class="card-title"> ${employee.gitHub()} </div>
+                <div class="card-title"><a href='${employee.gitHub()}'>${employee.gitHub()}</a></div>
             </div>
             `
         } else if (employee instanceof Manager) {
@@ -71,18 +75,18 @@ function createEmployeeHTML() {
                 <div class="card-title"> ${employee.getName()} </div>
                 <div class="card-title"> ${employee.getId()} </div>
                 <div class="card-title"> ${employee.getRole()} </div>
-                <div class="card-title"> ${employee.getEmail()} </div>
+                <div class="card-title"><a href='mailto: ${employee.getEmail()}'>Send Email</a></div>
                 <div class="card-title"> ${employee.getSchool()} </div>
             </div>
             `
         }
 
-        const asd = employeeFsOutput + '</body> </html>';
+        const finalFsOutput = employeeFsOutput + '<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script> </body> </html>';
 
-        fs.appendFile('index.html', asd, (err) => {
+        fs.appendFile('index.html', finalFsOutput, (err) => {
             if (err) throw err;
             console.log("Data appended successfully.");
-        }); 
+        });
     };
 };
 
@@ -140,7 +144,8 @@ function createEngineer() {
                 const newEngineer = new Engineer(response.engineerName, response.engineerId, response.engineerEmailAddress, response.engineerGitHub);
                 console.log(newEngineer);
 
-                employees.push(newEngineer);                
+                employees.push(newEngineer);
+                createEmployeeHTML();
                 return newEngineer;
             };
         });
@@ -262,6 +267,7 @@ inquirer
             console.log(newManager);
 
             employees.push(newManager);
+            createEmployeeHTML();
             return newManager;
         }
 
